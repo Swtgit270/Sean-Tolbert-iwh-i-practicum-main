@@ -142,7 +142,7 @@ app.get('/create-schema', async (req, res) => {
             }
         }
 
-        res.send('✓ HVAC Trucks schema created and sample records added. Visit / to view.');
+        res.send('HVAC Trucks schema created and sample records added. Visit / to view.');
     } catch (error) {
         console.error(error.response ? error.response.data : error.message);
         res.status(500).send('Error creating schema or sample records');
@@ -219,17 +219,17 @@ app.get('/import-csv', async (req, res) => {
 
                     try {
                         await axios.post(createUrl, body, { headers });
-                        console.log(`✓ Created: ${row.name}`);
+                        console.log(`Created: ${row.name}`);
                     } catch (err) {
                         const errorMsg = err.response ? JSON.stringify(err.response.data) : err.message;
-                        console.error(`✗ Failed to create ${row.name}:`, errorMsg);
+                        console.error(`Failed to create ${row.name}:`, errorMsg);
                         errors.push({ record: row.name, error: errorMsg });
                     }
                 }
 
                 // Send response
                 if (errors.length === 0) {
-                    res.send(`✓ Successfully imported ${results.length} HVAC Trucks from CSV. Visit /homepage to view.`);
+                    res.send(`Successfully imported ${results.length} HVAC Trucks from CSV. Visit /homepage to view.`);
                 } else {
                     res.send(`Imported ${results.length - errors.length} of ${results.length} records. ${errors.length} errors occurred. Check console for details.`);
                 }
