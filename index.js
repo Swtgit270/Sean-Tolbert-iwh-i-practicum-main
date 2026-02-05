@@ -149,31 +149,6 @@ app.get('/create-schema', async (req, res) => {
     }
 });
 
-// Debug endpoint to verify token and list schemas
-app.get('/debug-schemas', async (req, res) => {
-    const headers = {
-        Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
-       'Content-Type': 'application/json'
-    };
-
-   try {
-        const schemasUrl = 'https://api.hubapi.com/crm/v3/schemas';
-        const resp = await axios.get(schemasUrl, { headers });
-      const schemas = resp.data.results || [];
-        
-        res.json({
-            tokenValid: true,
-            schemasCount: schemas.length,
-            schemas: schemas
-        });
-    } catch (error) {
-        res.json({
-            tokenValid: false,
-            error: error.response ? JSON.stringify(error.response.data) : error.message
-        });
-    }
-});
-
 // Route to import HVAC Trucks from CSV file
 app.get('/import-csv', async (req, res) => {
     const headers = {
